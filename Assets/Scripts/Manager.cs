@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Main : MonoBehaviour {
+public class Manager : MonoBehaviour {
     void Start() {
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
             var dependencyStatus = task.Result;
