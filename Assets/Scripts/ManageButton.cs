@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ManageButton : MonoBehaviour
-{
+public class ManageButton : MonoBehaviour {
     private Text label;
 
     void Start() {
@@ -16,7 +15,6 @@ public class ManageButton : MonoBehaviour
         // IDToken取得
         // 取得できれば SignOut 、できなければ SingIn を表示する
         FirebaseAuthPlugIn.CallPlugin(OnEndOfGetIDToken);
-
     }
 
     public void OnClickButton() {
@@ -34,18 +32,19 @@ public class ManageButton : MonoBehaviour
     }
     
     private void OnEndOfGetIDToken(string token, string err) {
-        Debug.Log("token: " + token);
-        Debug.Log("err: " + err);
-
-        if (err == "" && token != "") {
+        string t = token ?? "";
+        string e = err ?? "";
+        ManageScroll.Log(DateTime.Now.ToString("tthh時mm分ss秒fffミリ秒") + ": OnEndOfGetIDToken");
+        
+        if (t != "" && e == "") {
             // SingIn済み
-            ManageScroll.Log("token: " + token);
+            ManageScroll.Log("token: " + t);
             label.text = "SignOut";
         }
 
-        if (err != "") {
-            ManageScroll.Log("err: " + err);
+        if (e != "") {
+            ManageScroll.Log("err: " + e);
             label.text = "SignIn";
-        }        
+        }
     }
 }
